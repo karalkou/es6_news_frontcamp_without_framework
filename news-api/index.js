@@ -1,7 +1,14 @@
 /*export default class NewsList{
- constructor(){}
+    constructor(){
+        this.BLOCK = null;
+    }
 
- }*/
+    init(){}
+
+    render(){}
+
+    fetchRequest(){}
+}*/
 
 
 document.addEventListener('DOMContentLoaded', () => {
