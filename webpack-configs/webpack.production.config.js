@@ -14,7 +14,7 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
                 exclude: /node_modules/,
                 use: [
                     { loader: "babel-loader" },
-                    { loader: 'eslint-loader' }
+                    /*{ loader: 'eslint-loader' }*/
                 ]
             },
             /* less */
