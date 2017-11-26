@@ -1,0 +1,65 @@
+/*--- common ---*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: #3a4756;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    font-family: "Open Sans", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.attribution-link{
+    margin-bottom: 20px;
+    font-size: 12px;
+    font-style: italic;
+    color: white;
+    text-align: center;
+}
+
+.attribution-link a{
+    color: white;
+}
+
+.attribution-link a:hover{
+    text-decoration: underline;
+}
+
+.news-source{
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-style: italic;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.news-container{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+}

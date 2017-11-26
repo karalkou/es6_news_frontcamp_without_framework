@@ -1,0 +1,22 @@
+/*--- source-list ---*/
+
+.source-list{
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 20px;
+    list-style: none;
+}
+
+.source-list__item{
+    color: white;
+    cursor: pointer;
+}
+
+.source-list__item:hover{
+    color: #dea6a6;
+    transition: color .3s
+}
+
+/*--- \source-list ---*/
