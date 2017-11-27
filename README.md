@@ -1,6 +1,5 @@
 # task with es6 without framework
 
-1. Rearrange JS
-2. Add loader
-3. Fix styles
-4. Apply webpack
+TO DO:
+1. Add loader
+2. Manage situation when title and desription is too long (ABC News)
