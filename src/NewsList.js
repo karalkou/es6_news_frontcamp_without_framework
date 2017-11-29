@@ -4,16 +4,22 @@ export default class NewsList{
     /**
      * @param node {DOM node} - node to apply class
      * @param newsSourceControls {DOM node} - node where source controls are
+     * @param newsSourceTitle {DOM node} - node where source title is
      * @param initialSource {String} - initial news source
      */
-    constructor(node, newsSourceControls, initialSource){
+    constructor(node, newsSourceControls, newsSourceTitle, initialSource){
         this.newsContainer = node;
-        this.newsSourceTitle = document.querySelector('.news-source');
+        this.newsSourceTitle = newsSourceTitle;
+        this.newsSourceControls = newsSourceControls;
         this.source = initialSource;
+    }
 
-
+    /**
+     * Starts methods and add event listeners
+     */
+    init(){
         this.handleFetch(this.source);
-        newsSourceControls.addEventListener('click', this.clickHandler);
+        this.newsSourceControls.addEventListener('click', this.clickHandler);
     }
 
     /**
