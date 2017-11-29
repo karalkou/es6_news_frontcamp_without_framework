@@ -2,8 +2,6 @@ import {apiKey, defaultSource, customImageUrl, dateOptions} from './config';
 
 export default class NewsList{
     /**
-     *
-     * Inits instance
      * @param node {DOM node} - node to apply class
      * @param newsSourceControls {DOM node} - node where source controls are
      * @param initialSource {String} - initial news source
@@ -14,19 +12,17 @@ export default class NewsList{
         this.source = initialSource;
 
 
-        this.triggerFetch(this.source);
+        this.handleFetch(this.source);
         newsSourceControls.addEventListener('click', this.clickHandler);
     }
 
     /**
      * Renders result to DOM
-     * @param stringNodes {String} - assembled news items
-     * @param source {String} - news source
+     * @param builtString {String} - assembled news items
      */
-    render({nodes: stringNodes, source}) {
-        this.newsSourceTitle.innerHTML = source;
-        this.newsContainer.innerHTML = '';
-        stringNodes.map((el) => this.newsContainer.insertAdjacentHTML('afterbegin', el));
+    render(builtString) {
+        this.newsSourceTitle.innerHTML = this.source;
+        this.newsContainer.innerHTML = builtString;
     };
 
     /**
@@ -35,11 +31,11 @@ export default class NewsList{
      * @returns {Array|*|{}}
      */
     parseData(data) {
-        return data.articles.map( (item) => {
+        return data.articles.reduce( (prevString, item) => {
             const { urlToImage, publishedAt, author, title, description, url } = item;
             const formattedPublishedAt = new Date(publishedAt).toLocaleString("en", dateOptions);
 
-            const newsCard = `
+            return `${prevString}
                 <div class="news-list-item">
                     <img class="news-list-item__img" src="${urlToImage || customImageUrl}" alt="News Article Image">
                     <div class="news-list-item__wrapper">
@@ -59,40 +55,27 @@ export default class NewsList{
                     </div>
                 </div>
               `;
-            return newsCard;
-        });
+        }, '');
     }
 
     /**
-     * Parses JSON
-     * @param data {Promise} - data from response
-     * @returns {*} JSON object
+     * Sends fetch request and handles its response
      */
-    parseJSON(data){
-        return data.json();
-    };
-
-    /**
-     * Sends fetch request
-     * @param source {String} - news source
-     */
-    triggerFetch(source = defaultSource) {
-        let that = this;
-        fetch(this.buildUrl(source))
-            .then((response) => this.parseJSON(response))
+    handleFetch() {
+        fetch(this.buildUrl())
+            .then((response) => response.json())
             .then((data) => this.parseData(data))
-            .then((nodes) => this.render({nodes, source}))
+            .then((builtString) => this.render(builtString))
             .catch((err) => console.log(err));
     };
 
     /**
      * Builds url to make fetch request
-     * @param source {String} - news source
      * @returns {string} - url
      */
-    buildUrl(source){
-        if ( source && source.length > 0 ) {
-            return `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${apiKey}`
+    buildUrl(){
+        if ( this.source && this.source.length > 0 ) {
+            return `https://newsapi.org/v2/top-headlines?sources=${this.source}&apiKey=${apiKey}`
         }
     };
 
@@ -104,7 +87,7 @@ export default class NewsList{
         let target = e.target;
         if (target.classList.contains('source-list__item')) {
             this.source = target.dataset.source;
-            this.triggerFetch(this.source);
+            this.handleFetch();
         }
     };
 };
