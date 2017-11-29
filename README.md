@@ -1,3 +1,5 @@
+#demo: https://karalkou.github.io/es6_news_frontcamp_without_framework/release/
+
 # task with es6 without framework
 
 TO DO:
