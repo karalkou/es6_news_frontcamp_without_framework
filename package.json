@@ -1,5 +1,5 @@
 {
-  "name": "mediator-observer",
+  "name": "es6_news_frontcamp17_without_framework",
   "version": "0.0.1",
   "description": "",
   "main": "webpack.config.babel.js",
@@ -30,5 +30,8 @@
     "webpack": "^3.5.5",
     "webpack-config": "^7.4.0",
     "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
   }
 }
