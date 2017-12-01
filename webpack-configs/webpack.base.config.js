@@ -6,7 +6,7 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 
     entry: {
-        index: ["babel-polyfill", "./src/index.js"]
+        index: ["babel-polyfill", 'whatwg-fetch', "./src/index.js"]
     },
 
     output: {
