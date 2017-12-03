@@ -9466,6 +9466,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (newsContainer) {
         new _NewsList2.default(newsContainer, newsSourceControls, newsSourceTitle, _config.defaultSource).init();
     }
+
+    /* area of 'babel-remove-console-log-expression' action */
 });
 
 /***/ }),
@@ -9574,7 +9576,7 @@ var NewsList = function () {
             }).then(function (builtString) {
                 return _this2.render(builtString);
             }).catch(function (err) {
-                return console.log(err);
+                return console.error(err);
             });
         }
     }, {

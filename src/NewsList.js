@@ -72,7 +72,7 @@ export default class NewsList{
             .then((response) => response.json())
             .then((data) => this.parseData(data))
             .then((builtString) => this.render(builtString))
-            .catch((err) => console.log(err));
+            .catch((err) => console.error(err));
     };
 
     /**

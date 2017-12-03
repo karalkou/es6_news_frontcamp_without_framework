@@ -7,5 +7,6 @@
     "prod": {
       "presets": []
     }
-  }
+  },
+  "plugins": ["./babel-plugins/babel-remove-console-log-expression/index.js"]
 }
