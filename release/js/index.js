@@ -9463,6 +9463,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var newsSourceControls = document.querySelector('.source-list');
     var newsSourceTitle = document.querySelector('.news-source');
 
+    /* \area of 'babel-remove-console-log-expression' action */
+
     if (newsContainer) {
         new _NewsList2.default(newsContainer, newsSourceControls, newsSourceTitle, _config.defaultSource).init();
     }
@@ -9556,7 +9558,7 @@ var NewsList = function () {
 
                 var formattedPublishedAt = new Date(publishedAt).toLocaleString("en", _config.dateOptions);
 
-                return prevString + '\n                <div class="news-list-item">\n                    <img class="news-list-item__img" src="' + (urlToImage || _config.customImageUrl) + '" alt="News Article Image">\n                    <div class="news-list-item__wrapper">\n                        <div class="news-list-item__header">\n                            <div class="news-list-item__date">\n                                ' + formattedPublishedAt + '\n                            </div>\n                        </div>\n                        <div class="news-list-item__data">\n                            <div class="news-list-item__content">\n                                <span class="news-list-item__author">' + author + '</span>\n                                <h1 class="news-list-item__title"><a href="#">' + title + '</a></h1>\n                                <p class="news-list-item__description">' + description + '</p>\n                                <a href="' + url + '" class="news-list-item__button">Read more</a>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n              ';
+                return prevString + '\n                <div class="news-list-item">\n                    <div class="news-list-item__img" style="background-image: url(' + (urlToImage || _config.customImageUrl) + ')"></div>\n                    <div class="news-list-item__wrapper">\n                        <div class="news-list-item__header">\n                            <div class="news-list-item__date">\n                                ' + formattedPublishedAt + '\n                            </div>\n                        </div>\n                        <div class="news-list-item__data">\n                            <div class="news-list-item__content">\n                                <span class="news-list-item__author">' + author + '</span>\n                                <h1 class="news-list-item__title"><a href="#">' + title + '</a></h1>\n                                <p class="news-list-item__description">' + description + '</p>\n                                <a href="' + url + '" class="news-list-item__button">Read more</a>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n              ';
             }, '');
         }
 
