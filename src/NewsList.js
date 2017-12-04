@@ -92,7 +92,7 @@ export default class NewsList{
     clickHandler = (e) => {
         let target = e.target;
         if (target.classList.contains('source-list__item')) {
-            this.source = target.dataset.source;
+            this.source = target.getAttribute('data-source');
             this.handleFetch();
         }
     };

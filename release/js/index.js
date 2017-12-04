@@ -9504,7 +9504,7 @@ var NewsList = function () {
         this.clickHandler = function (e) {
             var target = e.target;
             if (target.classList.contains('source-list__item')) {
-                _this.source = target.dataset.source;
+                _this.source = target.getAttribute('data-source');
                 _this.handleFetch();
             }
         };
