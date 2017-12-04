@@ -43,7 +43,7 @@ export default class NewsList{
 
             return `${prevString}
                 <div class="news-list-item">
-                    <img class="news-list-item__img" src="${urlToImage || customImageUrl}" alt="News Article Image">
+                    <div class="news-list-item__img" style="background-image: url(${urlToImage || customImageUrl})"></div>
                     <div class="news-list-item__wrapper">
                         <div class="news-list-item__header">
                             <div class="news-list-item__date">

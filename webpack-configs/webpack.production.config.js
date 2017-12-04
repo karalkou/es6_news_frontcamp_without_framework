@@ -18,7 +18,7 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
                 ]
             },
             /* less */
-            {
+            /*{
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
@@ -27,14 +27,15 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
                         { loader: 'less-loader', options: { sourceMap: true } }
                     ]
                 })
-            },
+            },*/
             /* css */
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
-                        { loader: 'css-loader', options: { sourceMap: true, minimize: true } }
+                        { loader: 'css-loader', options: { sourceMap: true, minimize: true } },
+                        { loader: "postcss-loader" }
                     ]
                 })
             }

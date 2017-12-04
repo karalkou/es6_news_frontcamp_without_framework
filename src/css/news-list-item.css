@@ -4,6 +4,7 @@
     position: relative;
     padding: 0 30px;
     width: 500px;
+    min-height: 400px;
     margin-bottom: 30px;
 
 }
@@ -35,7 +36,7 @@
     height: 100%;
     filter: brightness(70%);
     transition: filter .15s ease-in;
-    object-fit: cover;
+    background-size: cover;
 }
 
 .news-list-item:hover .news-list-item__img {

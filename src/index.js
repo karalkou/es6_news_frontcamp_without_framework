@@ -16,5 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('3');
     console.log('4');
     console.log('5');
+    /* \area of 'babel-remove-console-log-expression' action */
 
 });
