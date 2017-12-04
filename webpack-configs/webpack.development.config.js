@@ -36,7 +36,7 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
                 test: /\.css$/,
                 use: [
                     { loader: 'style-loader' },
-                    { loader: 'css-loader', options: { sourceMap: true } },
+                    { loader: 'css-loader', options: { sourceMap: true, minimize: true, importLoaders: 1 } },
                     { loader: "postcss-loader", options: { sourceMap: true } }
                 ]
             }
