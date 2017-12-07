@@ -23,15 +23,16 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
                 use: [
                     { loader: "babel-loader" }
                 ]
-            },/*
+            },
             {
                 test: /\.less$/,
                 use: [
                     { loader: 'style-loader' },
-                    { loader: 'css-loader', options: { sourceMap: true } },
+                    { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1 } },
+                    { loader: "postcss-loader", options: { sourceMap: true } },
                     { loader: 'less-loader', options: { sourceMap: true } }
                 ]
-            },*/
+            },
             {
                 test: /\.css$/,
                 use: [

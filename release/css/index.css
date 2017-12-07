@@ -59,22 +59,20 @@ a {
 }
 
 .news-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
     width: 100%;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap
 }
 
-.source-list {
+.news-container, .source-list {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-pack: distribute;
-    justify-content: space-around;
+    justify-content: space-around
+}
+
+.source-list {
     padding: 0;
     margin: 0;
     padding-bottom: 20px;

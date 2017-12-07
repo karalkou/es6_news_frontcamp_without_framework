@@ -32,7 +32,7 @@
 .news-list-item__img {
     position: absolute;
     z-index: 1;
-    width: calc(100% - 60px);
+    width: ~'calc(100% - 60px)';
     height: 100%;
     filter: brightness(70%);
     transition: filter .15s ease-in;
@@ -62,7 +62,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    transform: translateY(calc(70px + 1em));
+    transform: translateY(~'calc(70px + 1em)');
     transition: transform 0.3s;
 }
 
@@ -133,7 +133,7 @@
 
 .news-list-item__data {
     color: white;
-    transform: translateY(calc(70px + 4em));
+    transform: translateY(~'calc(70px + 4em)');
 }
 
 .news-list-item__title a {

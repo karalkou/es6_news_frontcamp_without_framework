@@ -1,7 +1,7 @@
 import NewsList from './NewsList';
 import { defaultSource } from './config';
 
-import './css/styles.css';
+import './styles/styles.less';
 
 document.addEventListener('DOMContentLoaded', () => {
     const newsContainer = document.querySelector('.news-container');
