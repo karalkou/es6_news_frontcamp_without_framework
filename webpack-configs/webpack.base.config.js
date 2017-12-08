@@ -5,8 +5,10 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 
+    context: path.resolve(__dirname, "./../src"),
+
     entry: {
-        index: ["babel-polyfill", 'whatwg-fetch', "./src/index.js"]
+        index: ["babel-polyfill", "whatwg-fetch", "./index.js"]
     },
 
     output: {
@@ -64,7 +66,7 @@ module.exports = {
             })
         },
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './index.html'
         })
     ],
 
