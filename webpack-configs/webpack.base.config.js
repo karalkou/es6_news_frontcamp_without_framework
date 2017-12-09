@@ -13,19 +13,12 @@ module.exports = {
 
     output: {
         filename: 'js/[name].js',
-        path: path.join(__dirname, './../release'),
-        publicPath: './'
+        path: path.resolve(__dirname, './../release'),
+        publicPath: './' /* it means relative to html page. The same parent directory. */
     },
 
     module: {
         rules: [
-            /* html */
-            /*{
-                test: /\.(html)$/,
-                use: [
-                    { loader: 'html-loader' }
-                ]
-            },*/
             /* fonts */
             {
                 test: /\.(ttf|eot|woff|woff2)$/,

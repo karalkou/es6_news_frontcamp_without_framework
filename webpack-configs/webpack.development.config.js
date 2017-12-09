@@ -8,7 +8,8 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
     devtool: 'inline-source-map',
 
     output: {
-        publicPath: '/'
+        publicPath: '/',
+        pathinfo: true
     },
 
     devServer: {
