@@ -2,8 +2,6 @@ import webpack from 'webpack';
 import Config from 'webpack-config';
 const path = require('path');
 
-let HtmlReloadPlugin = require('reload-html-webpack-plugin');
-
 export default new Config().extend('webpack-configs/webpack.base.config.js').merge({
     devtool: 'eval-source-map',
 
@@ -16,7 +14,8 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
         port: 9000,
         headers: {
             'Access-Control-Allow-Origin': '*'
-        }
+        },
+        publicPath: 'http://localhost:9000/'
     },
 
     module: {
@@ -48,7 +47,5 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
         ]
     },
 
-    plugins: [
-        new HtmlReloadPlugin()
-    ]
+    plugins: []
 });
