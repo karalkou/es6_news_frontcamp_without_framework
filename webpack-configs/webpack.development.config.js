@@ -5,7 +5,7 @@ const path = require('path');
 let HtmlReloadPlugin = require('reload-html-webpack-plugin');
 
 export default new Config().extend('webpack-configs/webpack.base.config.js').merge({
-    devtool: 'inline-source-map',
+    devtool: 'eval-source-map',
 
     output: {
         publicPath: '/',

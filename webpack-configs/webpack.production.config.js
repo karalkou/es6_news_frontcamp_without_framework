@@ -44,11 +44,12 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
     },
 
     plugins: [
-        /*new webpack.optimize.UglifyJsPlugin({
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true,
             compress: {
                 warnings: true
             }
-        }),*/
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'js/common.js',
