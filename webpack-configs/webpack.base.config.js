@@ -14,7 +14,7 @@ module.exports = {
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, './../release'),
-        publicPath: './' /* it means relative to html page. The same parent directory. */
+        publicPath: './' /* it means relative to an html page. The same parent directory. Simple rule: The URL of your output.path from the view of the HTML page.*/
     },
 
     module: {
@@ -49,6 +49,10 @@ module.exports = {
                 ]
             }
         ]
+    },
+
+    resolve: {
+        modules: ['node_modules']
     },
 
     plugins: [

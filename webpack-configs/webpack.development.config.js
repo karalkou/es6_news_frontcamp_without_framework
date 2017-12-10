@@ -13,7 +13,10 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
     },
 
     devServer: {
-        port: 9000
+        port: 9000,
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        }
     },
 
     module: {
