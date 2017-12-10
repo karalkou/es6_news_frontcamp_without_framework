@@ -15,7 +15,7 @@ export default new Config().extend('webpack-configs/webpack.base.config.js').mer
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
-        publicPath: 'http://localhost:9000/'
+        publicPath: 'http://localhost:9000/' /* It is recommended that devServer.publicPath is the same as output.publicPath */
     },
 
     module: {
