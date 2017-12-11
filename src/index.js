@@ -1,14 +1,21 @@
-import NewsList from './NewsList';
-import { defaultSource } from './config';
-
-import './styles/styles.less';
+import './styles/initial-styles.less';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const newsContainer = document.querySelector('.news-container');
-    const newsSourceControls = document.querySelector('.source-list');
-    const newsSourceTitle = document.querySelector('.news-source');
 
-    if ( newsContainer ) { new NewsList(newsContainer, newsSourceControls, newsSourceTitle, defaultSource).init(); }
+    let button = document.querySelector('.show-news-container__btn');
+    let content = document.querySelector('.show-news-container__content');
+
+    button.onclick = e => import(/* webpackChunkName: "logicInit" */ './logicInit')
+        .then(module => {
+            var logicInit = module.default;
+
+            logicInit();
+            button.classList.add('show-news-container__btn_hidden');
+            content.classList.add('show-news-container__content_visible');
+        })
+        .catch((e) => {
+            console.error('error: ', e)
+        });
 
     /* area of 'babel-remove-console-log-expression' action */
     console.log('1');
