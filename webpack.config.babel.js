@@ -1,7 +1,20 @@
-import Config, { environment } from 'webpack-config';
+const merge = require('webpack-merge');
+const base = require('./webpack-configs/webpack.base.config');
+const production = require('./webpack-configs/webpack.production.config');
+const development = require('./webpack-configs/webpack.development.config');
 
-environment.setAll({
-    env: () => process.env.NODE_ENV
-});
-
-export default new Config().extend('webpack-configs/webpack.[env].config.js');
+module.exports = function(env) {
+    console.log('env: ', env);
+    if (env === 'production') {
+        return merge([
+            base(),
+            production()
+        ]);
+    }
+    if (env === 'development') {
+        return merge([
+            base(),
+            development()
+        ]);
+    }
+};
