@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+/*const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');*/
 
 module.exports = function () {
     return{
@@ -47,6 +49,14 @@ module.exports = function () {
             ]
         },
 
-        plugins: []
+        plugins: [
+            /*new HtmlWebpackPlugin({
+                template: './index.html',
+                alwaysWriteToDisk: true,
+            }),
+            new HtmlWebpackHarddiskPlugin({
+                // outputPath: path.resolve(__dirname, '../release')
+            })*/
+        ]
     }
 };
