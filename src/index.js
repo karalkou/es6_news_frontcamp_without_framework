@@ -1,4 +1,5 @@
 import './styles/initial-styles.less';
+import store  from './redux-simple'
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -17,12 +18,32 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('error: ', e)
         });
 
+    /*-------- redux counter ----------*/
+
+    let counterContainer = document.querySelector('#counter-container');
+
+    const render = () => {
+        console.log(store.getState());
+        console.log(store.getState().counter);
+        counterContainer.innerText = store.getState().counter;
+    };
+
+    store.subscribe(render);
+    render();
+
+    document.addEventListener('click', () => {
+        store.dispatch({ type : 'INCREMENT' })
+    });
+
+    /*-------- \redux counter ----------*/
+
+
     /* area of 'babel-remove-console-log-expression' action */
-    console.log('1');
+    /*console.log('1');
     console.log('2');
     console.log('3');
     console.log('4');
-    console.log('5');
+    console.log('5');*/
     /* \area of 'babel-remove-console-log-expression' action */
 
 });
