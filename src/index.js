@@ -1,5 +1,5 @@
 import './styles/initial-styles.less';
-import { createStore } from './utils/simple-redux-store';
+import store  from './redux-simple'
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -22,21 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let counterContainer = document.querySelector('#counter-container');
 
-    const counter = (state = 0, action) => {
-        switch (action.type) {
-            case 'INCREMENT':
-                return state + 1;
-            case 'DECREMENT':
-                return state - 1;
-            default:
-                return state;
-        }
-    }
-
-    const store = createStore(counter);
-
     const render = () => {
-        counterContainer.innerText = store.getState();
+        console.log(store.getState());
+        console.log(store.getState().counter);
+        counterContainer.innerText = store.getState().counter;
     };
 
     store.subscribe(render);
