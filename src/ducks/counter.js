@@ -12,7 +12,10 @@ export const DECREMENT = `${prefix}/DECREMENT`;
 /**
  * Reducer
  * */
-export default function counter(state = 0, action) {
+export default (state = 0, action) => {
+    console.log('duck counter reducer');
+    console.log('duck state ', state);
+    console.log('duck action.type ', action.type);
     switch (action.type) {
         case INCREMENT:
             return state + 1;
