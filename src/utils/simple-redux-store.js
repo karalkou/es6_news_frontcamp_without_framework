@@ -5,7 +5,11 @@ export const createStore = (reducer) => {
     const getState = () => state;
 
     const dispatch = (action) => {
+        console.log('action: ', action);
+        console.log('reducer: ', reducer);
+        console.log('state before: ', state);
         state = reducer(state, action);
+        console.log('state after: ', state);
         listeners.forEach(listener => listener());
     };
 

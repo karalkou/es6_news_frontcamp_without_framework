@@ -8,15 +8,13 @@ const combineReducers = (reducers) => {
           state[key],
           action,
         );
+
         return nextState;
       },
       {},  // start with empty object
     );
   };
 };
-
-
-
 
 export default combineReducers({
     [counterModule]: counterReducer
