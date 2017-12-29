@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let counterContainer = document.querySelector('#counter-container');
 
     const render = () => {
-        console.log('--render')
         counterContainer.innerText = store.getState().counter;
     };
 
@@ -32,8 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     render();
 
     document.addEventListener('click', () => {
-        debugger;
-        console.log('--click');
         store.dispatch({ type : INCREMENT })
     });
 
