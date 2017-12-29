@@ -1,5 +1,6 @@
 import './styles/initial-styles.less';
-import store  from './redux-simple'
+import store  from './redux-simple';
+import { INCREMENT } from './ducks/counter';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -30,8 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     render();
 
     document.addEventListener('click', () => {
-        console.log('dispatch');
-        store.dispatch({ type : 'INCREMENT' })
+        store.dispatch({ type : INCREMENT })
     });
 
     /*-------- \redux counter ----------*/
