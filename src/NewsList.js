@@ -1,4 +1,7 @@
 import {apiKey, defaultSource, customImageUrl, dateOptions} from './config';
+import store  from './redux-simple';
+import {data as defaultData} from './mocks/news';
+import { FETCH_ALL } from "./ducks/news"
 
 export default class NewsList{
     /**
@@ -18,15 +21,21 @@ export default class NewsList{
      * Starts methods and add event listeners
      */
     init(){
-        this.handleFetch(this.source);
+        // debugger;
+
+        store.subscribe(this.render.bind(this));
+        this.handleFetchInReduxWay();
+
         this.newsSourceControls.addEventListener('click', this.clickHandler);
     }
 
     /**
      * Renders result to DOM
-     * @param builtString {String} - assembled news items
      */
-    render(builtString) {
+    render() {
+        const data = store.getState().news;
+        let builtString = this.parseData(data);
+
         this.newsSourceTitle.innerHTML = this.source;
         this.newsContainer.innerHTML = builtString;
     };
@@ -67,11 +76,16 @@ export default class NewsList{
     /**
      * Sends fetch request and handles its response
      */
-    handleFetch() {
+    handleFetchInReduxWay(){
         fetch(this.buildUrl())
             .then((response) => response.json())
-            .then((data) => this.parseData(data))
-            .then((builtString) => this.render(builtString))
+            .then((data) => {
+                store.dispatch( {
+                    type: FETCH_ALL,
+                    payload: data
+                });
+                this.render();
+            })
             .catch((err) => console.error(err));
     };
 
@@ -93,7 +107,7 @@ export default class NewsList{
         let target = e.target;
         if (target.classList.contains('source-list__item')) {
             this.source = target.getAttribute('data-source');
-            this.handleFetch();
+            this.handleFetchInReduxWay();
         }
     };
 };

@@ -1,23 +1,36 @@
+'use strict';
 import './styles/initial-styles.less';
 import store  from './redux-simple';
 import { INCREMENT } from './ducks/counter';
 
+import logicInit from './logicInit';
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    let button = document.querySelector('.show-news-container__btn');
-    let content = document.querySelector('.show-news-container__content');
+    // let button = document.querySelector('.show-news-container__btn');
+    // let content = document.querySelector('.show-news-container__content');
+    //
+    // button.onclick = e => import(/* webpackChunkName: "logicInit" */ './logicInit')
+    //     .then(module => {
+    //         var logicInit = module.default;
+    //
+    //         logicInit();
+    //         button.classList.add('show-news-container__btn_hidden');
+    //         content.classList.add('show-news-container__content_visible');
+    //     })
+    //     .catch((e) => {
+    //         console.error('error: ', e)
+    //     });
 
-    button.onclick = e => import(/* webpackChunkName: "logicInit" */ './logicInit')
-        .then(module => {
-            var logicInit = module.default;
+    /*-------******************************--------*/
+    logicInit();
 
-            logicInit();
-            button.classList.add('show-news-container__btn_hidden');
-            content.classList.add('show-news-container__content_visible');
-        })
-        .catch((e) => {
-            console.error('error: ', e)
-        });
+
+
+
+    /*-------******************************--------*/
+
+
 
     /*-------- redux counter ----------*/
 
