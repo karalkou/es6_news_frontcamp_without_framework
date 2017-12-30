@@ -1,4 +1,5 @@
-import counterReducer, {moduleName as counterModule} from '../ducks/counter'
+import counterReducer, {moduleName as counterModule} from '../ducks/counter';
+import newsReducer, {moduleName as newsModule} from '../ducks/news';
 
 const combineReducers = (reducers) => {
   return (state={}, action) => {
@@ -17,5 +18,6 @@ const combineReducers = (reducers) => {
 };
 
 export default combineReducers({
-    [counterModule]: counterReducer
+    [counterModule]: counterReducer,
+    [newsModule]: newsReducer,
 })
