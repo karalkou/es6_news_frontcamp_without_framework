@@ -1,3 +1,10 @@
 export default (...funcs) => {
-    return funcs.reduceRight((composed, f) => f(composed));
+    console.log('funcs: ', funcs);
+
+    return funcs.reduceRight((composed, f) => {
+        console.log('f: ', f);
+        console.log('composed: ', composed);
+
+        return f(composed)
+    });
 }

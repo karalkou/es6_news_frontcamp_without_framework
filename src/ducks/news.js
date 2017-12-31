@@ -34,3 +34,15 @@ export function fetchAll(email, password) {
         type: FETCH_ALL
     }
 }
+
+/**
+ * Middlewares
+ */
+export const fetchMiddleware = () => store => next => action => {
+    console.log('store', store);
+    console.log('next', next);
+    console.log('action', action);
+    let result = next(action);
+    console.log('next state', store.getState());
+    return result
+};
