@@ -1,13 +1,12 @@
 import {apiKey, defaultSource, customImageUrl, dateOptions} from './config';
 import store  from './redux-simple';
-import {data as defaultData} from './mocks/news';
-import { FETCH_ALL } from "./ducks/news"
+import { FETCH_ALL } from "./ducks/news";
 
 export default class NewsList{
     /**
-     * @param node {DOM node} - node to apply class
-     * @param newsSourceControls {DOM node} - node where source controls are
-     * @param newsSourceTitle {DOM node} - node where source title is
+     * @param node {object} - DOM node to apply class
+     * @param newsSourceControls {object} - DOM node where source controls are
+     * @param newsSourceTitle {object} - DOM node where source title is
      * @param initialSource {String} - initial news source
      */
     constructor(node, newsSourceControls, newsSourceTitle, initialSource){
@@ -21,10 +20,13 @@ export default class NewsList{
      * Starts methods and add event listeners
      */
     init(){
-        // debugger;
-
         store.subscribe(this.render.bind(this));
-        this.handleFetchInReduxWay();
+
+        //TODO: create 'connect' to make dispatching more comfortable
+        store.dispatch( {
+            type: FETCH_ALL,
+            callAPI: this.buildUrl()
+        });
 
         this.newsSourceControls.addEventListener('click', this.clickHandler);
     }
@@ -34,10 +36,13 @@ export default class NewsList{
      */
     render() {
         const data = store.getState().news;
-        let builtString = this.parseData(data);
+        if (data && data.articles.length > 0) {
+            let builtString = this.parseData(data);
 
-        this.newsSourceTitle.innerHTML = this.source;
-        this.newsContainer.innerHTML = builtString;
+            this.newsSourceTitle.innerHTML = this.source;
+            this.newsContainer.innerHTML = builtString;
+        }
+
     };
 
     /**
@@ -74,22 +79,6 @@ export default class NewsList{
     }
 
     /**
-     * Sends fetch request and handles its response
-     */
-    handleFetchInReduxWay(){
-        fetch(this.buildUrl())
-            .then((response) => response.json())
-            .then((data) => {
-                store.dispatch( {
-                    type: FETCH_ALL,
-                    payload: data
-                });
-                this.render();
-            })
-            .catch((err) => console.error(err));
-    };
-
-    /**
      * Builds url to make fetch request
      * @returns {string} - url
      */
@@ -107,7 +96,11 @@ export default class NewsList{
         let target = e.target;
         if (target.classList.contains('source-list__item')) {
             this.source = target.getAttribute('data-source');
-            this.handleFetchInReduxWay();
+
+            store.dispatch( {
+                type: FETCH_ALL,
+                callAPI: this.buildUrl()
+            });
         }
     };
 };

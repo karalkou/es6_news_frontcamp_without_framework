@@ -26,11 +26,11 @@ export default (state = 0, action) => {
 /**
  * Action Creators
  * */
-export function incrementCounter(email, password) {
+/*export function incrementCounter(email, password) {
     return {
         type: INCREMENT
     }
-}
+}*/
 
 export function decrementCounter(email, password) {
     return {
