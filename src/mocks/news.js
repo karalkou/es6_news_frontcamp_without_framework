@@ -1,4 +1,10 @@
-export const data1 = {
+export const data = {
+    "status": null,
+    "totalResults": null,
+    "articles": []
+};
+
+export const mockData = {
     "status": "ok",
     "totalResults": 10,
     "articles": [
@@ -123,4 +129,4 @@ export const data1 = {
             "publishedAt": "2017-12-29T15:32:28Z"
         }
     ]
-}
+};

@@ -24,17 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /*-------******************************--------*/
     logicInit();
-
-
-
-
     /*-------******************************--------*/
+
+    /* area of 'babel-remove-console-log-expression' action */
+    /*console.log('1');
+     console.log('2');
+     console.log('3');
+     console.log('4');
+     console.log('5');*/
+    /* \area of 'babel-remove-console-log-expression' action */
 
 
 
     /*-------- redux counter ----------*/
 
-    let counterContainer = document.querySelector('#counter-container');
+    /*let counterContainer = document.querySelector('#counter-container');
 
     const render = () => {
         counterContainer.innerText = store.getState().counter;
@@ -45,17 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('click', () => {
         store.dispatch({ type : INCREMENT })
-    });
+    });*/
 
     /*-------- \redux counter ----------*/
-
-
-    /* area of 'babel-remove-console-log-expression' action */
-    /*console.log('1');
-    console.log('2');
-    console.log('3');
-    console.log('4');
-    console.log('5');*/
-    /* \area of 'babel-remove-console-log-expression' action */
 
 });
