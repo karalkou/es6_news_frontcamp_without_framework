@@ -1,4 +1,4 @@
-import {appName, defaultSource, apiKey} from './../config';
+import {appName, defaultSource} from './../config';
 
 /**
  * Constants
