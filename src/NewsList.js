@@ -36,6 +36,7 @@ export default class NewsList{
      */
     render() {
         const data = store.getState().news;
+
         if (data && data.articles.length > 0) {
             let builtString = this.parseData(data);
 

@@ -24,8 +24,8 @@ export const createStore = (reducer, enhancer) => {
      * @param action
      */
     const dispatch = (action) => {
-        console.log('action: ', action);
         console.log('prev state: ', state);
+        console.log('action: ', action);
         state = reducer(state, action);
         console.log('next state: ', state);
         listeners.forEach(listener => listener());
