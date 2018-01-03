@@ -1,19 +1,13 @@
-import {apiKey, defaultSource, customImageUrl, dateOptions} from './config';
-import store  from './redux-simple';
-import { FETCH_ALL } from "./ducks/news";
+import {customImageUrl, dateOptions} from '../config';
+import store  from './../redux-simple';
+import { FETCH_ALL } from "../ducks/news";
 
 export default class NewsList{
     /**
      * @param node {object} - DOM node to apply class
-     * @param newsSourceControls {object} - DOM node where source controls are
-     * @param newsSourceTitle {object} - DOM node where source title is
-     * @param initialSource {String} - initial news source
      */
-    constructor(node, newsSourceControls, newsSourceTitle, initialSource){
+    constructor(node){
         this.newsContainer = node;
-        this.newsSourceTitle = newsSourceTitle;
-        this.newsSourceControls = newsSourceControls;
-        this.source = initialSource;
     }
 
     /**
@@ -25,10 +19,8 @@ export default class NewsList{
         //TODO: create 'connect' to make dispatching more comfortable
         store.dispatch( {
             type: FETCH_ALL,
-            callAPI: this.buildUrl()
+            callAPI: true
         });
-
-        this.newsSourceControls.addEventListener('click', this.clickHandler);
     }
 
     /**
@@ -38,10 +30,7 @@ export default class NewsList{
         const data = store.getState().news;
 
         if (data && data.articles.length > 0) {
-            let builtString = this.parseData(data);
-
-            this.newsSourceTitle.innerHTML = this.source;
-            this.newsContainer.innerHTML = builtString;
+            this.newsContainer.innerHTML = this.parseData(data);
         }
 
     };
@@ -78,30 +67,4 @@ export default class NewsList{
               `;
         }, '');
     }
-
-    /**
-     * Builds url to make fetch request
-     * @returns {string} - url
-     */
-    buildUrl(){
-        if ( this.source && this.source.length > 0 ) {
-            return `https://newsapi.org/v2/top-headlines?sources=${this.source}&apiKey=${apiKey}`
-        }
-    };
-
-    /**
-     * Handles click on document
-     * @param e - event
-     */
-    clickHandler = (e) => {
-        let target = e.target;
-        if (target.classList.contains('source-list__item')) {
-            this.source = target.getAttribute('data-source');
-
-            store.dispatch( {
-                type: FETCH_ALL,
-                callAPI: this.buildUrl()
-            });
-        }
-    };
 };

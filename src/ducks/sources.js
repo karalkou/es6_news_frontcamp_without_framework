@@ -1,0 +1,43 @@
+import {appName, defaultSource, apiKey} from './../config';
+
+/**
+ * Constants
+ * */
+export const moduleName = 'sources';
+const prefix = `${appName}/${moduleName}`;
+
+export const CHANGE_TITLE = `${prefix}/CHANGE_TITLE`;
+
+/**
+ * Reducer
+ * */
+let defaultState = {
+    currentTitle: defaultSource
+};
+
+export default (state = defaultState, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case CHANGE_TITLE:
+            return {
+                ...state,
+                ...payload
+            };
+        default:
+            return state;
+    }
+}
+
+/**
+ * Action Creators
+ * */
+export function changeTitle() {
+    return {
+        type: CHANGE_TITLE
+    }
+}
+
+/**
+ * Middlewares
+ */

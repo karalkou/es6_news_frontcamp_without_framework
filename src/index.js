@@ -34,23 +34,4 @@ document.addEventListener('DOMContentLoaded', () => {
      console.log('5');*/
     /* \area of 'babel-remove-console-log-expression' action */
 
-
-
-    /*-------- redux counter ----------*/
-
-    /*let counterContainer = document.querySelector('#counter-container');
-
-    const render = () => {
-        counterContainer.innerText = store.getState().counter;
-    };
-
-    store.subscribe(render);
-    render();
-
-    document.addEventListener('click', () => {
-        store.dispatch({ type : INCREMENT })
-    });*/
-
-    /*-------- \redux counter ----------*/
-
 });
