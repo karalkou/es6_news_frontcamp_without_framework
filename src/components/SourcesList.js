@@ -1,6 +1,6 @@
 import store  from './../redux-simple';
-import { FETCH_ALL } from "./../ducks/news";
-import { CHANGE_TITLE } from "./../ducks/sources";
+import { fetchAll } from "./../ducks/news";
+import { changeTitle } from "./../ducks/sources";
 
 export default class SourcesList{
     /**
@@ -22,18 +22,8 @@ export default class SourcesList{
         if (target.classList.contains('source-list__item')) {
             let source = target.getAttribute('data-source');
 
-            store.dispatch( {
-                type: CHANGE_TITLE,
-                payload: {
-                    currentTitle: source
-                }
-            });
-
-            store.dispatch( {
-                type: FETCH_ALL,
-                callAPI: true,
-                payload: source
-            });
+            store.dispatch( changeTitle(source) );
+            store.dispatch( fetchAll(source) );
         }
     };
 };

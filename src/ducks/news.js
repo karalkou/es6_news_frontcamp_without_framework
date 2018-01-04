@@ -32,11 +32,13 @@ export default (state = defaultData, action) => {
 /**
  * Action Creators
  * */
-/*export function fetchAll() {
+export function fetchAll(source) {
     return {
-        type: FETCH_ALL
+        type: FETCH_ALL,
+        callAPI: true,
+        payload: source
     }
-}*/
+}
 
 /**
  * Middlewares
