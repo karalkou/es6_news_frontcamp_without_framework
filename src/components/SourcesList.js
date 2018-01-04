@@ -1,6 +1,5 @@
 import store  from './../redux-simple';
-import { fetchAll } from "./../ducks/news";
-import { changeTitle } from "./../ducks/sources";
+import { storeManager } from "./../redux-simple/command"
 
 export default class SourcesList{
     /**
@@ -22,8 +21,8 @@ export default class SourcesList{
         if (target.classList.contains('source-list__item')) {
             let source = target.getAttribute('data-source');
 
-            store.dispatch( changeTitle(source) );
-            store.dispatch( fetchAll(source) );
+            store.dispatch( storeManager.execute('CHANGE_TITLE_COMMAND', source) );
+            store.dispatch( storeManager.execute('FETCH_ALL_COMMAND', source) );
         }
     };
 };

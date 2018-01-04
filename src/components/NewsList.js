@@ -1,6 +1,6 @@
-import {customImageUrl, dateOptions} from '../config';
+import {customImageUrl, dateOptions} from './../config';
 import store  from './../redux-simple';
-import { fetchAll } from "../ducks/news";
+import { storeManager } from "./../redux-simple/command";
 
 export default class NewsList{
     /**
@@ -17,7 +17,7 @@ export default class NewsList{
         store.subscribe(this.render.bind(this));
 
         //TODO: create 'connect' to make dispatching more comfortable
-        store.dispatch( fetchAll() );
+        store.dispatch( storeManager.execute('FETCH_ALL_COMMAND') );
     }
 
     /**
