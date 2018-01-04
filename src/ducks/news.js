@@ -1,4 +1,4 @@
-import {appName} from './../config';
+import {appName, defaultSource, apiKey} from './../config';
 import {data as defaultData} from './../mocks/news';
 
 /**
@@ -32,11 +32,13 @@ export default (state = defaultData, action) => {
 /**
  * Action Creators
  * */
-/*export function fetchAll(email, password) {
+export function fetchAll(source) {
     return {
-        type: FETCH_ALL
+        type: FETCH_ALL,
+        callAPI: true,
+        payload: source
     }
-}*/
+}
 
 /**
  * Middlewares
@@ -44,11 +46,17 @@ export default (state = defaultData, action) => {
 export const fetchMiddleware = store => next => action => {
     if (!action.callAPI) return next(action);
 
-    const {callAPI, ...rest} = action;
+    const {callAPI, payload, ...rest} = action;
 
     next( {...rest, type: FETCH_ALL_START} );
 
-    fetch(callAPI)
+    const buildUrl = (source = defaultSource) => {
+        if ( source && source.length > 0 ) {
+            return `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${apiKey}`
+        }
+    };
+
+    fetch(buildUrl(payload))
         .then((response) => response.json())
         .then((data) => {
             next( {...rest, type: FETCH_ALL_SUCCESS, payload: data} );
