@@ -1,7 +1,5 @@
 'use strict';
 import './styles/initial-styles.less';
-import store  from './redux-simple';
-import { INCREMENT } from './ducks/counter';
 
 import logicInit from './logicInit';
 
