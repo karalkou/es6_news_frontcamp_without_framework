@@ -32,7 +32,7 @@ export default (state = defaultState, action) => {
 /**
  * Action Creators
  * */
-export function changeTitle(source) {
+export function changeTitle(source=defaultSource) {
     return {
         type: CHANGE_TITLE,
         payload: {
