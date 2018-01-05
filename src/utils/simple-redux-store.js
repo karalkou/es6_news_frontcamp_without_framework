@@ -1,34 +1,51 @@
-export const createStore = (reducer, enhancer) => {
-    let state = {};
-    let listeners = [];
-
-    if (typeof enhancer !== 'undefined') {
-        if (typeof enhancer !== 'function') {
-            throw new Error('Expected the enhancer to be a function.');
+export default class CreateStore {
+    constructor(reducer, enhancer){
+        // to implement Singleton design pattern
+        if (typeof CreateStore.instance === 'object') {
+            return CreateStore.instance;
         }
 
-        return enhancer(createStore)(reducer);
-    }
+        /*---- Ordinary common logic ----*/
+        this.reducer = reducer;
+        this.enhancer = enhancer;
 
-    if (typeof reducer !== 'function') {
-        throw new Error('Expected the reducer to be a function.');
+        this.state = {};
+        this.listeners = [];
+
+        if (typeof enhancer !== 'undefined') {
+            if (typeof enhancer !== 'function') {
+                throw new Error('Expected the enhancer to be a function.');
+            }
+
+            return enhancer(CreateStore)(reducer);
+        }
+
+        if (typeof reducer !== 'function') {
+            throw new Error('Expected the reducer to be a function.');
+        }
+
+        this.dispatch({}); // dummy dispatch
+        /*---- \Ordinary common logic ----*/
+
+        /* to implement Singleton design pattern */
+        CreateStore.instance = this;
     }
 
     /**
      * Gets current state
      */
-    const getState = () => state;
+    getState = () => this.state;
 
     /**
      * Dispatches action and calls listeners
      * @param action
      */
-    const dispatch = (action) => {
-        console.log('prev state: ', state);
+    dispatch = (action) => {
+        console.log('prev state: ', this.state);
         console.log('action: ', action);
-        state = reducer(state, action);
-        console.log('next state: ', state);
-        listeners.forEach(listener => listener());
+        this.state = this.reducer(this.state, action);
+        console.log('next state: ', this.state);
+        this.listeners.forEach(listener => listener());
     };
 
     /**
@@ -36,18 +53,11 @@ export const createStore = (reducer, enhancer) => {
      * @param listener
      * @returns {function()} - unsubscribe function (removes listener)
      */
-    const subscribe = (listener) => {
-        listeners.push(listener);
+    subscribe = (listener) => {
+        this.listeners.push(listener);
         return () => {
-            listeners = listeners.filter(l => l !== listener);
+            this.listeners = this.listeners.filter(l => l !== listener);
         }
     };
-
-    // When a store is created, an "INIT" action is dispatched so that every
-    // reducer returns their initial state. This effectively populates
-    // the initial state tree.
-    dispatch({}); // dummy dispatch
-
-    return { getState, dispatch, subscribe };
 
 };

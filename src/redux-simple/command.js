@@ -10,6 +10,3 @@ export const storeManager = {
         return this.commands[command] && this.commands[command](argument);
     }
 };
-
-// let endpoint = e.target.getAttribute('data-endpoint');
-// store.dispatch(StoreManager.execute('ENDPOINT_CHANGE', endpoint));

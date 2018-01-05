@@ -1,9 +1,9 @@
 import compose from './compose';
 
 export default function applyMiddlewareToStore(...middlewares) {
-    return (createStore) =>
+    return (CreateStore) =>
         (reducer, initialState) => {
-            let store = createStore(reducer, initialState);
+            let store = new CreateStore(reducer, initialState);
             let dispatch = store.dispatch;
             let chain = [];
             let middlewareAPI = {
