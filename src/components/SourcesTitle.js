@@ -18,7 +18,18 @@ export default class SourcesTitle{
         store.dispatch( storeManager.execute('CHANGE_TITLE_COMMAND') );
     }
 
+    /**
+     * Renders source title
+     */
     render(){
         this.newsSourceTitle.innerHTML = store.getState().sources.currentTitle;
+    }
+
+    /**
+     * This method is created only to implement the Prototype Design Pattern
+     * @returns {SourcesTitle} - instance of class SourcesTitle
+     */
+    clone() {
+        return new SourcesTitle(this.newsSourceTitle);
     }
 };

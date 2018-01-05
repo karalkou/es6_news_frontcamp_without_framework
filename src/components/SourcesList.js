@@ -16,6 +16,18 @@ export default class SourcesList{
         this.newsSourceControls.addEventListener('click', this.clickHandler);
     }
 
+    /**
+     * This method is created only to implement the Prototype Design Pattern
+     * @returns {SourcesList} - instance of class SourceList
+     */
+    clone() {
+        return new SourcesList(this.newsSourceControls);
+    }
+
+    /**
+     * Handles click
+     * @param e {Object} - event object
+     */
     clickHandler = (e) => {
         let target = e.target;
         if (target.classList.contains('source-list__item')) {

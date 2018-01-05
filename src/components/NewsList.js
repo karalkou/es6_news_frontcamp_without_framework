@@ -64,4 +64,12 @@ export default class NewsList{
               `;
         }, '');
     }
+
+    /**
+     * This method is created only to implement the Prototype Design Pattern
+     * @returns {NewsList} - instance of class NewsList
+     */
+    clone() {
+        return new NewsList(this.newsContainer);
+    }
 };
