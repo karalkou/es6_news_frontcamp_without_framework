@@ -3,10 +3,7 @@
 # task with es6 without framework
 
 #How to start:
-##OS Windows: 
-#####npm run build-dev-win - development
-#####npm run build-prod-win - production
-##Unix: 
+
 #####npm run build-dev - development
 #####npm run build-prod - production
 
