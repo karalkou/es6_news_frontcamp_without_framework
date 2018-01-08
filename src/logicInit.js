@@ -2,6 +2,8 @@ import NewsList from './components/NewsList';
 import SourcesList from './components/SourcesList';
 import SourcesTitle from './components/SourcesTitle';
 
+window.NewsList = NewsList;
+
 import './styles/dynamic-styles.less';
 
 export default () => {

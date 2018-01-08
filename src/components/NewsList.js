@@ -1,7 +1,42 @@
 import {customImageUrl, dateOptions} from './../config';
 import store  from './../redux-simple';
 import { storeManager } from "./../redux-simple/command";
+import dispatchSubscribeDecorator from "./../decorators/dispatchSubscribeDecorator";
 
+/*-------------------------------------------------------------------------------------------------------------------*/
+function mixin (behaviour, sharedBehaviour = {}) {
+    const instanceKeys = Reflect.ownKeys(behaviour);
+    const sharedKeys = Reflect.ownKeys(sharedBehaviour);
+    const typeTag = Symbol('isa');
+
+    function _mixin (clazz) {
+        for (let property of instanceKeys)
+            Object.defineProperty(clazz.prototype, property, {
+                value: behaviour[property],
+                writable: true
+            });
+        Object.defineProperty(clazz.prototype, typeTag, { value: true });
+        return clazz;
+    }
+    for (let property of sharedKeys)
+        Object.defineProperty(_mixin, property, {
+            value: sharedBehaviour[property],
+            enumerable: sharedBehaviour.propertyIsEnumerable(property)
+        });
+    Object.defineProperty(_mixin, Symbol.hasInstance, {
+        value: (i) => !!i[typeTag]
+    });
+    return _mixin;
+}
+
+
+function superhero(target) {
+    target.isSuperhero = true;
+    target.power = 'flight';
+    console.log('target from decorator: ', target)
+}
+/*-------------------------------------------------------------------------------------------------------------------*/
+@superhero
 export default class NewsList{
     /**
      * @param node {object} - DOM node to apply class
@@ -72,4 +107,6 @@ export default class NewsList{
     clone() {
         return new NewsList(this.newsContainer);
     }
-};
+}
+
+// export default dispatchSubscribeDecorator(NewsList)
