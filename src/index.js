@@ -1,4 +1,7 @@
+'use strict';
 import './styles/initial-styles.less';
+
+import logicInit from './logicInit';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -17,12 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('error: ', e)
         });
 
+    /*-------***********for dev**************--------*/
+    // logicInit();
+    /*-------********************************--------*/
+
     /* area of 'babel-remove-console-log-expression' action */
-    console.log('1');
-    console.log('2');
-    console.log('3');
-    console.log('4');
-    console.log('5');
+    /*console.log('1');
+     console.log('2');
+     console.log('3');
+     console.log('4');
+     console.log('5');*/
     /* \area of 'babel-remove-console-log-expression' action */
 
 });

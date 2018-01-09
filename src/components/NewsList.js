@@ -1,34 +1,37 @@
-import {apiKey, defaultSource, customImageUrl, dateOptions} from './config';
+import {customImageUrl, dateOptions} from './../config';
+import { storeManager } from "./../redux-simple/command";
+import ProvideStoreDecorator from "../decorators/ProvideStoreDecorator";
 
+@ProvideStoreDecorator()
 export default class NewsList{
     /**
-     * @param node {DOM node} - node to apply class
-     * @param newsSourceControls {DOM node} - node where source controls are
-     * @param newsSourceTitle {DOM node} - node where source title is
-     * @param initialSource {String} - initial news source
+     * @param instanceArgs {object} - args to create instance
      */
-    constructor(node, newsSourceControls, newsSourceTitle, initialSource){
+    constructor(instanceArgs){
+        this.instanceArgs = instanceArgs;
+        const { node, store } = instanceArgs;
         this.newsContainer = node;
-        this.newsSourceTitle = newsSourceTitle;
-        this.newsSourceControls = newsSourceControls;
-        this.source = initialSource;
+        this.store = store;
     }
 
     /**
      * Starts methods and add event listeners
      */
     init(){
-        this.handleFetch(this.source);
-        this.newsSourceControls.addEventListener('click', this.clickHandler);
+        this.store.subscribe(this.render.bind(this));
+        this.store.dispatch( storeManager.execute('FETCH_ALL_COMMAND') );
     }
 
     /**
      * Renders result to DOM
-     * @param builtString {String} - assembled news items
      */
-    render(builtString) {
-        this.newsSourceTitle.innerHTML = this.source;
-        this.newsContainer.innerHTML = builtString;
+    render() {
+        const data = this.store.getState().news;
+
+        if (data && data.articles.length > 0) {
+            this.newsContainer.innerHTML = this.parseData(data);
+        }
+
     };
 
     /**
@@ -65,35 +68,10 @@ export default class NewsList{
     }
 
     /**
-     * Sends fetch request and handles its response
+     * This method is created only to implement the Prototype Design Pattern
+     * @returns {NewsList} - instance of class NewsList
      */
-    handleFetch() {
-        fetch(this.buildUrl())
-            .then((response) => response.json())
-            .then((data) => this.parseData(data))
-            .then((builtString) => this.render(builtString))
-            .catch((err) => console.error(err));
-    };
-
-    /**
-     * Builds url to make fetch request
-     * @returns {string} - url
-     */
-    buildUrl(){
-        if ( this.source && this.source.length > 0 ) {
-            return `https://newsapi.org/v2/top-headlines?sources=${this.source}&apiKey=${apiKey}`
-        }
-    };
-
-    /**
-     * Handles click on document
-     * @param e - event
-     */
-    clickHandler = (e) => {
-        let target = e.target;
-        if (target.classList.contains('source-list__item')) {
-            this.source = target.getAttribute('data-source');
-            this.handleFetch();
-        }
-    };
-};
+    clone() {
+        return new NewsList(this.instanceArgs);
+    }
+}
