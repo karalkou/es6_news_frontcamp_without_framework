@@ -4,7 +4,7 @@ import SourcesTitle from './components/SourcesTitle';
 
 import './styles/dynamic-styles.less';
 
-// I suppose it can be treated as facade pattern, cause we simplify initializing for users
+// I suppose it can be treated as Facade pattern, cause we simplify initializing for users
 class Facade{
     constructor(node, classToCreate){
         // Prototype Design Pattern
