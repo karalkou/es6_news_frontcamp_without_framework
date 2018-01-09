@@ -1,65 +1,34 @@
 import {customImageUrl, dateOptions} from './../config';
-import store  from './../redux-simple';
 import { storeManager } from "./../redux-simple/command";
-import dispatchSubscribeDecorator from "./../decorators/dispatchSubscribeDecorator";
+import ProvideStoreDecorator from "../decorators/ProvideStoreDecorator";
 
-/*-------------------------------------------------------------------------------------------------------------------*/
-function mixin (behaviour, sharedBehaviour = {}) {
-    const instanceKeys = Reflect.ownKeys(behaviour);
-    const sharedKeys = Reflect.ownKeys(sharedBehaviour);
-    const typeTag = Symbol('isa');
-
-    function _mixin (clazz) {
-        for (let property of instanceKeys)
-            Object.defineProperty(clazz.prototype, property, {
-                value: behaviour[property],
-                writable: true
-            });
-        Object.defineProperty(clazz.prototype, typeTag, { value: true });
-        return clazz;
-    }
-    for (let property of sharedKeys)
-        Object.defineProperty(_mixin, property, {
-            value: sharedBehaviour[property],
-            enumerable: sharedBehaviour.propertyIsEnumerable(property)
-        });
-    Object.defineProperty(_mixin, Symbol.hasInstance, {
-        value: (i) => !!i[typeTag]
-    });
-    return _mixin;
-}
-
-
-function superhero(target) {
-    target.isSuperhero = true;
-    target.power = 'flight';
-    console.log('target from decorator: ', target)
-}
-/*-------------------------------------------------------------------------------------------------------------------*/
-@superhero
+@ProvideStoreDecorator()
 export default class NewsList{
     /**
-     * @param node {object} - DOM node to apply class
+     * @param instanceArgs {object} - args to create instance
      */
-    constructor(node){
+    constructor(instanceArgs){
+        this.instanceArgs = instanceArgs;
+        const { node, store } = instanceArgs;
         this.newsContainer = node;
+        this.store = store;
     }
 
     /**
      * Starts methods and add event listeners
      */
     init(){
-        store.subscribe(this.render.bind(this));
+        this.store.subscribe(this.render.bind(this));
 
         //TODO: create 'connect' to make dispatching more comfortable
-        store.dispatch( storeManager.execute('FETCH_ALL_COMMAND') );
+        this.store.dispatch( storeManager.execute('FETCH_ALL_COMMAND') );
     }
 
     /**
      * Renders result to DOM
      */
     render() {
-        const data = store.getState().news;
+        const data = this.store.getState().news;
 
         if (data && data.articles.length > 0) {
             this.newsContainer.innerHTML = this.parseData(data);
@@ -105,8 +74,9 @@ export default class NewsList{
      * @returns {NewsList} - instance of class NewsList
      */
     clone() {
-        return new NewsList(this.newsContainer);
+        return new NewsList(this.instanceArgs);
     }
 }
 
-// export default dispatchSubscribeDecorator(NewsList)
+/*
+export default ProvideStoreDecorator()(NewsList)*/

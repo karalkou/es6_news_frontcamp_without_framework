@@ -1,28 +1,32 @@
 import store  from './../redux-simple';
-import { CHANGE_TITLE } from "./../ducks/sources";
-import { storeManager } from "./../redux-simple/command"
+import { storeManager } from "./../redux-simple/command";
+import ProvideStoreDecorator from "../decorators/ProvideStoreDecorator";
 
+@ProvideStoreDecorator()
 export default class SourcesTitle{
     /**
-     * @param node {object} - DOM node to apply class
+     * @param instanceArgs {object} - args to create instance
      */
-    constructor(node){
+    constructor(instanceArgs){
+        this.instanceArgs = instanceArgs;
+        const { node, store } = instanceArgs;
         this.newsSourceTitle = node;
+        this.store = store;
     }
 
     /**
      * Starts methods and add event listeners
      */
     init(){
-        store.subscribe(this.render.bind(this));
-        store.dispatch( storeManager.execute('CHANGE_TITLE_COMMAND') );
+        this.store.subscribe(this.render.bind(this));
+        this.store.dispatch( storeManager.execute('CHANGE_TITLE_COMMAND') );
     }
 
     /**
      * Renders source title
      */
     render(){
-        this.newsSourceTitle.innerHTML = store.getState().sources.currentTitle;
+        this.newsSourceTitle.innerHTML = this.store.getState().sources.currentTitle;
     }
 
     /**
@@ -30,6 +34,6 @@ export default class SourcesTitle{
      * @returns {SourcesTitle} - instance of class SourcesTitle
      */
     clone() {
-        return new SourcesTitle(this.newsSourceTitle);
+        return new SourcesTitle(this.instanceArgs);
     }
 };

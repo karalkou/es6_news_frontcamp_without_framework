@@ -1,12 +1,16 @@
-import store  from './../redux-simple';
-import { storeManager } from "./../redux-simple/command"
+import { storeManager } from "./../redux-simple/command";
+import ProvideStoreDecorator from "../decorators/ProvideStoreDecorator";
 
+@ProvideStoreDecorator()
 export default class SourcesList{
     /**
-     * @param node {object} - DOM node to apply class
+     * @param instanceArgs {object} - args to create instance
      */
-    constructor(node){
+    constructor(instanceArgs){
+        this.instanceArgs = instanceArgs;
+        const { node, store } = instanceArgs;
         this.newsSourceControls = node;
+        this.store = store;
     }
 
     /**
@@ -21,7 +25,7 @@ export default class SourcesList{
      * @returns {SourcesList} - instance of class SourceList
      */
     clone() {
-        return new SourcesList(this.newsSourceControls);
+        return new SourcesList(this.instanceArgs);
     }
 
     /**
@@ -33,8 +37,8 @@ export default class SourcesList{
         if (target.classList.contains('source-list__item')) {
             let source = target.getAttribute('data-source');
 
-            store.dispatch( storeManager.execute('CHANGE_TITLE_COMMAND', source) );
-            store.dispatch( storeManager.execute('FETCH_ALL_COMMAND', source) );
+            this.store.dispatch( storeManager.execute('CHANGE_TITLE_COMMAND', source) );
+            this.store.dispatch( storeManager.execute('FETCH_ALL_COMMAND', source) );
         }
     };
 };
