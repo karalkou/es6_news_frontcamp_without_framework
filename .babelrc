@@ -8,5 +8,5 @@
       "presets": []
     }
   },
-  "plugins": ["./babel-plugins/babel-remove-console-log-expression/index.js"]
+  "plugins": ["transform-decorators-legacy"/*, "./babel-plugins/babel-remove-console-log-expression/index.js"*/]
 }

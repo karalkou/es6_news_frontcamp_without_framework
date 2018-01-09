@@ -59,7 +59,9 @@ module.exports = function(){
         plugins: [
             function() {
                 this.plugin('watch-run', function(watching, callback) {
+                    console.log('*********************************');
                     console.log('* Begin compile at ' + new Date());
+                    console.log('*********************************');
                     callback();
                 })
             },
