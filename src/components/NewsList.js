@@ -1,30 +1,32 @@
 import {customImageUrl, dateOptions} from './../config';
-import store  from './../redux-simple';
 import { storeManager } from "./../redux-simple/command";
+import ProvideStoreDecorator from "../decorators/ProvideStoreDecorator";
 
+@ProvideStoreDecorator()
 export default class NewsList{
     /**
-     * @param node {object} - DOM node to apply class
+     * @param instanceArgs {object} - args to create instance
      */
-    constructor(node){
+    constructor(instanceArgs){
+        this.instanceArgs = instanceArgs;
+        const { node, store } = instanceArgs;
         this.newsContainer = node;
+        this.store = store;
     }
 
     /**
      * Starts methods and add event listeners
      */
     init(){
-        store.subscribe(this.render.bind(this));
-
-        //TODO: create 'connect' to make dispatching more comfortable
-        store.dispatch( storeManager.execute('FETCH_ALL_COMMAND') );
+        this.store.subscribe(this.render.bind(this));
+        this.store.dispatch( storeManager.execute('FETCH_ALL_COMMAND') );
     }
 
     /**
      * Renders result to DOM
      */
     render() {
-        const data = store.getState().news;
+        const data = this.store.getState().news;
 
         if (data && data.articles.length > 0) {
             this.newsContainer.innerHTML = this.parseData(data);
@@ -70,6 +72,6 @@ export default class NewsList{
      * @returns {NewsList} - instance of class NewsList
      */
     clone() {
-        return new NewsList(this.newsContainer);
+        return new NewsList(this.instanceArgs);
     }
-};
+}
