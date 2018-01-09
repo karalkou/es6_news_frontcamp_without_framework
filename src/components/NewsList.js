@@ -19,8 +19,6 @@ export default class NewsList{
      */
     init(){
         this.store.subscribe(this.render.bind(this));
-
-        //TODO: create 'connect' to make dispatching more comfortable
         this.store.dispatch( storeManager.execute('FETCH_ALL_COMMAND') );
     }
 
@@ -77,6 +75,3 @@ export default class NewsList{
         return new NewsList(this.instanceArgs);
     }
 }
-
-/*
-export default ProvideStoreDecorator()(NewsList)*/
