@@ -4,11 +4,10 @@ import ProvideStoreDecorator from "../decorators/ProvideStoreDecorator";
 @ProvideStoreDecorator()
 export default class SourcesList{
     /**
-     * @param instanceArgs {object} - args to create instance
+     * @param node {object} - args to create instance
+     * @param store {object} - args to create instance
      */
-    constructor(instanceArgs){
-        this.instanceArgs = instanceArgs;
-        const { node, store } = instanceArgs;
+    constructor(node, store){
         this.newsSourceControls = node;
         this.store = store;
     }
@@ -25,7 +24,7 @@ export default class SourcesList{
      * @returns {SourcesList} - instance of class SourceList
      */
     clone() {
-        return new SourcesList(this.instanceArgs);
+        return new SourcesList(this.newsSourceControls, this.store);
     }
 
     /**

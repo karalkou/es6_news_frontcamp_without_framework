@@ -1,7 +1,7 @@
 'use strict';
 import './styles/initial-styles.less';
 
-import logicInit from './logicInit';
+// import logicInit from './logicInit';
 
 document.addEventListener('DOMContentLoaded', () => {
 
