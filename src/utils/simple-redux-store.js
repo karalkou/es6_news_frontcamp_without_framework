@@ -1,7 +1,7 @@
 export default class CreateStore {
     constructor(reducer, enhancer){
         // to implement Singleton design pattern
-        if (typeof CreateStore.instance === 'object') {
+        if (CreateStore.instance) {
             return CreateStore.instance;
         }
 
