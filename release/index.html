@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>News API without framework</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="./css/index.css" rel="stylesheet"></head>
+<body>
+    <div class="container">
+        <div class="attribution-link">
+            Thanks to <a href="//newsapi.org/">newsapi.org</a>
+        </div>
+
+        <div class="show-news-container">
+            <button class="show-news-container__btn">Show news</button>
+            <div class="show-news-container__content">
+                <div class="sources-component">
+                    <ul class="source-list">
+                        <li class="source-list__item" data-source="bbc-news">bbc-news</li>
+                        <li class="source-list__item" data-source="cbc-news">cbc-news</li>
+                        <li class="source-list__item" data-source="abc-news">abc-news</li>
+                    </ul>
+                    <h3 class="news-source"></h3>
+                </div>
+
+                <div class="news-node">
+                    <div class="news-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="counter-container"></div>
+<script type="text/javascript" src="./js/common.js"></script><script type="text/javascript" src="./js/index.js"></script></body>
+</html>
