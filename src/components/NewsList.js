@@ -9,8 +9,6 @@ export default class NewsList{
      * @param store {object} - args to create instance
      */
     constructor(node, store){
-        console.log('node: ', node);
-        console.log('store: ', store);
         this.newsContainer = node;
         this.store = store;
     }
