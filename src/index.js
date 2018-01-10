@@ -1,14 +1,14 @@
 'use strict';
 import './styles/initial-styles.less';
 
-import logicInit from './logicInit';
+// import logicInit from './logicInit';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    /*let button = document.querySelector('.show-news-container__btn');
+    let button = document.querySelector('.show-news-container__btn');
     let content = document.querySelector('.show-news-container__content');
 
-    button.onclick = e => import(/!* webpackChunkName: "logicInit" *!/ './logicInit')
+    button.onclick = e => import(/* webpackChunkName: "logicInit" */ './logicInit')
         .then(module => {
             var logicInit = module.default;
 
@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch((e) => {
             console.error('error: ', e)
-        });*/
+        });
 
     /*-------***********for dev**************--------*/
-    logicInit();
+    // logicInit();
     /*-------********************************--------*/
 
     /* area of 'babel-remove-console-log-expression' action */
